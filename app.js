@@ -1,4 +1,6 @@
 //RGB to HEX color code achmadakif 14.09.23
+const btn = document.getElementById('btn');
+
 
 const counting = {
   0:0, 1:1,
@@ -12,42 +14,50 @@ const counting = {
 }
 let hex = '';
 
-let rgbRed = prompt('masukkan kode RED');
-function convertRed (r) {
-  //Divide by 16
-  let division = r / 16;
-  let floored = Math.floor(division);
-  //Get the decimal part then multiply by 16
-  let decimalPart = (division - floored) * 16;
-  //Find HEX value in Object
-  hex += counting[floored]
-  hex += counting[decimalPart] 
-}
-convertRed(rgbRed)
+btn.addEventListener('click', ()=>{
+  const rgbRed = document.getElementById('redCode').value;
+    rgbGreen = document.getElementById('greenCode').value;
+    rgbBlue = document.getElementById('blueCode').value;
+  
+    function convertRed (r) {
+      //Divide by 16
+      let division = r / 16;
+      let floored = Math.floor(division);
+      //Get the decimal part then multiply by 16
+      let decimalPart = (division - floored) * 16;
+      //Find HEX value in Object
+      hex += counting[floored]
+      hex += counting[decimalPart]
+    }
+    convertRed(rgbRed)
+    
+    function convertGreen (g) {
+      let division = g / 16;
+      let floored = Math.floor(division);
+      let decimalPart = (division - floored) * 16;
+    
+      hex += counting[floored] 
+      hex += counting[decimalPart]
+    }
+    convertGreen(rgbGreen)
+    
+    function convertBlue (b) {
+      let division = b / 16;
+      let floored = Math.floor(division);
+      let decimalPart = (division - floored) * 16;
+    
+      hex += counting[floored] 
+      hex += counting[decimalPart]
+    }
+    convertBlue(rgbBlue)
+  let hexInput = document.getElementById('hexCode');
+  hexInput.setAttribute('value', hex)
+})
 
-let rgbGreen = prompt('masukkan kode GREEN');
-function convertGreen (g) {
-  let division = g / 16;
-  let floored = Math.floor(division);
-  let decimalPart = (division - floored) * 16;
 
-  hex += counting[floored] 
-  hex += counting[decimalPart]
-}
-convertGreen(rgbGreen)
 
-let rgbBlue = prompt('masukkan kode BLUE');
-function convertBlue (b) {
-  let division = b / 16;
-  let floored = Math.floor(division);
-  let decimalPart = (division - floored) * 16;
 
-  hex += counting[floored] 
-  hex += counting[decimalPart]
-}
-convertBlue(rgbBlue)
 
-console.log(hex)
 
 
 
