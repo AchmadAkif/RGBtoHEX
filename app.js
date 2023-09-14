@@ -1,5 +1,8 @@
 //RGB to HEX color code achmadakif 14.09.23
 const btn = document.getElementById('btn');
+let red = document.getElementById('redCode'),
+  green = document.getElementById('greenCode'),
+  blue = document.getElementById('blueCode');
 
 
 const counting = {
@@ -12,12 +15,12 @@ const counting = {
   12:'C', 13:'D', 
   14:'E', 15:'F'
 }
-let hex = '';
 
 btn.addEventListener('click', ()=>{
-  const rgbRed = document.getElementById('redCode').value;
-    rgbGreen = document.getElementById('greenCode').value;
-    rgbBlue = document.getElementById('blueCode').value;
+  let hex = '';
+  let rgbRed = document.getElementById('redCode').value,
+  rgbGreen = document.getElementById('greenCode').value,
+  rgbBlue = document.getElementById('blueCode').value;
   
     function convertRed (r) {
       //Divide by 16
@@ -50,10 +53,15 @@ btn.addEventListener('click', ()=>{
       hex += counting[decimalPart]
     }
     convertBlue(rgbBlue)
-  let hexInput = document.getElementById('hexCode');
-  hexInput.setAttribute('value', hex)
-})
 
+  let hexInput = document.getElementById('hexCode');
+  hexInput.value = hex
+
+
+  red.value = '';
+  green.value = '';
+  blue.value = '';
+})
 
 
 
