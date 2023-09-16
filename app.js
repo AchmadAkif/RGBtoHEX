@@ -3,9 +3,11 @@ const btn = document.getElementById('btn');
 let red = document.getElementById('redCode'),
   green = document.getElementById('greenCode'),
   blue = document.getElementById('blueCode');
+let hexInput = document.getElementById('hexCode');
 
 
-const counting = {
+
+const rgbToHex = {
   0:0, 1:1,
   2:2, 3:3,
   4:4, 5:5,
@@ -18,10 +20,13 @@ const counting = {
 
 btn.addEventListener('click', ()=>{
   let hex = '';
-  let rgbRed = document.getElementById('redCode').value,
-  rgbGreen = document.getElementById('greenCode').value,
-  rgbBlue = document.getElementById('blueCode').value;
   
+  // Convert RGB to Hex
+  if (!red.value == 0 || !green.value == 0 || !blue.value == 0) {
+    let rgbRed = document.getElementById('redCode').value,
+    rgbGreen = document.getElementById('greenCode').value,
+    rgbBlue = document.getElementById('blueCode').value;
+
     function convertRed (r) {
       //Divide by 16
       let division = r / 16;
@@ -29,8 +34,8 @@ btn.addEventListener('click', ()=>{
       //Get the decimal part then multiply by 16
       let decimalPart = (division - floored) * 16;
       //Find HEX value in Object
-      hex += counting[floored]
-      hex += counting[decimalPart]
+      hex += rgbToHex[floored]
+      hex += rgbToHex[decimalPart]
     }
     convertRed(rgbRed)
     
@@ -39,8 +44,8 @@ btn.addEventListener('click', ()=>{
       let floored = Math.floor(division);
       let decimalPart = (division - floored) * 16;
     
-      hex += counting[floored] 
-      hex += counting[decimalPart]
+      hex += rgbToHex[floored] 
+      hex += rgbToHex[decimalPart]
     }
     convertGreen(rgbGreen)
     
@@ -49,23 +54,40 @@ btn.addEventListener('click', ()=>{
       let floored = Math.floor(division);
       let decimalPart = (division - floored) * 16;
     
-      hex += counting[floored] 
-      hex += counting[decimalPart]
+      hex += rgbToHex[floored] 
+      hex += rgbToHex[decimalPart]
     }
     convertBlue(rgbBlue)
 
-  let hexInput = document.getElementById('hexCode');
-  hexInput.value = hex
+    hexInput.value = hex
+    red.value = '';
+    green.value = '';
+    blue.value = '';
+  } 
 
+  // Convert Hex to RGB
+  else if (!hexInput.value == 0) {
+    function convertHex (hex) {
+      var bigint = parseInt(hex, 16);
+      var r = (bigint >> 16) & 255;
+      var g = (bigint >> 8) & 255;
+      var b = bigint & 255;
 
+      red.value = r;
+      green.value = g;
+      blue.value = b;
+
+      hexInput.value = '';
+    }
+    convertHex(hexInput.value)
+  }
+})
+
+function removeValue () {
   red.value = '';
   green.value = '';
   blue.value = '';
-})
-
-
-
-
+}
 
 
 
